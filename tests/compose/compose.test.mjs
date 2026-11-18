@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { composeNames } from '../../src/compose.mjs';
 import { normalize } from '../../src/normalize.mjs';
 
-// Task C 60a3c73e-dbd4-9233-e9ae-d29cbff8fae2, tests round 1.
-// Frozen workspace aa10220b7a06b56119870e0dd83b63426ecfc9b6.
-// Inputs: execution-input:d2c495a3-20b0-a590-a05a-ad8b64db17dc:{task,design,test_configuration,workspace}.
+// Task C 60a3c73e-dbd4-9233-e9ae-d29cbff8fae2, tests round 2.
+// Frozen workspace 8976180ffb09b1f78efb9ab13ff71ce2bd09a663.
+// Inputs: execution-input:43f59ebc-2da6-5544-b508-2674440b4921:{task,design,test_configuration,workspace}.
 // This file tests behavior; import/call structure and platform gates require review/receipts.
 
 test('C prerequisite: real normalize accepts and rejects representative inputs', () => {
@@ -102,4 +102,21 @@ test('C2: invalid item in a frozen array propagates TypeError', () => {
   const values = Object.freeze([' Alice ', null]);
   assert.throws(() => composeNames(values), TypeError);
   assert.deepEqual(values, [' Alice ', null]);
+});
+
+test('C2: reads values in order and stops at the first invalid item', () => {
+  const reads = [];
+  const values = [];
+  for (const [index, value] of [' Alice ', null, ' Bob '].entries()) {
+    Object.defineProperty(values, index, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        reads.push(index);
+        return value;
+      },
+    });
+  }
+  assert.throws(() => composeNames(values), TypeError);
+  assert.deepEqual(reads, [0, 1]);
 });
