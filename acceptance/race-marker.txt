@@ -1,0 +1,1 @@
+External target-race fixture; retain in the final tested tree.
