@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { composeNames } from '../../src/compose.mjs';
 import { normalize } from '../../src/normalize.mjs';
 
-// Task C 60a3c73e-dbd4-9233-e9ae-d29cbff8fae2, tests round 2.
-// Frozen workspace 8976180ffb09b1f78efb9ab13ff71ce2bd09a663.
-// Inputs: execution-input:43f59ebc-2da6-5544-b508-2674440b4921:{task,design,test_configuration,workspace}.
+// Task C 60a3c73e-dbd4-9233-e9ae-d29cbff8fae2, tests round 3.
+// Frozen workspace 1b7381298f4ab6b08ac8e87e31569f951af2b699.
+// Inputs: execution-input:86d14d7a-3464-3119-c9a1-a781895c0ac7:{task,design,test_configuration,workspace}.
 // This file tests behavior; import/call structure and platform gates require review/receipts.
 
 test('C prerequisite: real normalize accepts and rejects representative inputs', () => {
